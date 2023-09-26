@@ -42,13 +42,12 @@ func GetAddress(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Resposta:", result)
 			json.NewEncoder(w).Encode(result)
 			return
-		case <-time.After(time.Hour):
+		case <-time.After(time.Second):
 			fmt.Println("Timeout!")
 			w.WriteHeader(http.StatusRequestTimeout)
 			return
 		}
 	}
-
 }
 
 func requestToApiCEP(cep string, response chan<- Response) {
