@@ -1,0 +1,73 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API to search CEP using multithreading",
+        "title": "Multithreading CEP API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Lucas belusso",
+            "email": "belussolucas@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/search_cep",
+    "paths": {
+        "/{cep}": {
+            "get": {
+                "description": "Get a Address from a given CEP",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "cep"
+                ],
+                "summary": "Get address from CEP",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "DDDDDDDD",
+                        "description": "CEP",
+                        "name": "cep",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.Response"
+                        }
+                    },
+                    "408": {
+                        "description": "Request Timeout"
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handlers.Response": {
+            "type": "object",
+            "properties": {
+                "cep": {},
+                "erro": {
+                    "type": "boolean"
+                },
+                "mensagem": {
+                    "type": "string"
+                },
+                "origem": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

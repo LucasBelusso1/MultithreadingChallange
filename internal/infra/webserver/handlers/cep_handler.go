@@ -18,6 +18,16 @@ type Response struct {
 	Cep     interface{} `json:"cep,omitempty"`
 }
 
+// Get			Address from CEP
+// @Summary		Get address from CEP
+// @Description	Get a Address from a given CEP
+// @Tags		cep
+// @Produce		json
+// @Param		cep path string true "CEP" Format(DDDDDDDD)
+// @Success 	200 {object} Response
+// @Failure 	500	{object} Response
+// @Failure 	408
+// @Router 		/{cep} [get]
 func GetAddress(w http.ResponseWriter, r *http.Request) {
 	cep := chi.URLParam(r, "cep")
 

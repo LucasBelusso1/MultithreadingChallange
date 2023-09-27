@@ -1,0 +1,49 @@
+basePath: /search_cep
+definitions:
+  handlers.Response:
+    properties:
+      cep: {}
+      erro:
+        type: boolean
+      mensagem:
+        type: string
+      origem:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: belussolucas@gmail.com
+    name: Lucas belusso
+  description: API to search CEP using multithreading
+  termsOfService: http://swagger.io/terms/
+  title: Multithreading CEP API
+  version: "1.0"
+paths:
+  /{cep}:
+    get:
+      description: Get a Address from a given CEP
+      parameters:
+      - description: CEP
+        format: DDDDDDDD
+        in: path
+        name: cep
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.Response'
+        "408":
+          description: Request Timeout
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.Response'
+      summary: Get address from CEP
+      tags:
+      - cep
+swagger: "2.0"
